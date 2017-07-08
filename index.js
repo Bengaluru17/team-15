@@ -51,12 +51,13 @@ router.post('/additems', function (req, res) {
 router.get('/admin/inventory', function (req, res) {
 	db.collection('inventory_to_approve').findOne({
 		name: req.body.name,
-        item: req.body.item,
-        quantity: req.body.amount,
-        amount: req.body.quantity,
 	}, function(err, dat){
 		if (!err && dat) {
-			db.collection('inventory').insertOne({}, function(err, dat1){
+			db.collection('inventory').insertOne({
+				name: req.body.name,
+        		item: req.body.item,
+        		quantity: req.body.amount,
+        		amount: req.body.quantity,}, function(err, dat1){
 				if (!err && dat1) {
 
         	
@@ -111,6 +112,7 @@ router.get('/education',function (req, res){
 });
 
 router.post('/addedu',function(req, res){
+	console.log(req.body);
 	db.collection('academics').insertOne({
 		attendance: req.body.attendance,
         	dance: req.body.dance,
@@ -122,9 +124,6 @@ router.post('/addedu',function(req, res){
 				"status": "success"
 			});
 		}
-		else if(!err && !dat){
-			res.send('no data input');
-		}
 		else{
 			res.send({
 				"status": "Failed"
@@ -134,6 +133,7 @@ router.post('/addedu',function(req, res){
 });
 
 router.post('/buy', function(req, res){
+	console.log(req.body);
 	db.collection('buying').insertOne({
 		name: req.body.name,
 		item: req.body.item,
@@ -144,9 +144,6 @@ router.post('/buy', function(req, res){
 				"status": "success"
 			});
 		}
-		else if(!err && !dat){
-			res.send('no data input');
-		}
 		else{
 			res.send({
 				"status": "Failed"
@@ -155,7 +152,9 @@ router.post('/buy', function(req, res){
 	})
 });
 
+
 router.post('/bought', function(req, res){
+	console.log(req.body);
 	if(err){
 		res.send({
 				"status": "Failed"
