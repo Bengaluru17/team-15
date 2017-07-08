@@ -1,20 +1,41 @@
-/* 
+var express = require('express');
+var router = express.Router();
 
-I built this login form to block the front end of most of my freelance wordpress projects during the development stage. 
+/* GET home page. */
+router.get('/', function(req, res, next) {
+    res.render('index', { title: 'Express' });
+});
 
-This is just the HTML / CSS of it but it uses wordpress's login system. 
+router.get('/welcome', function(req, res, next) {
+    res.send("fasdljfo ;asjflsdj");
+});
 
-Nice and Simple
+router.get('/getitems', function (req, res){
+	    // Get the inventory collection
+			//
+			//     // Find the items
+			  db.collection('inventory').findOne({}, function (err, res) {
+			     if (!error && res) {
+			        console.log(res);
+			     }
+			     else {
+			        console.log(err);
+			     }
+			  })
+		});
+router.post('/additems', function (req, res) {
+	  db.collection('inventory').addOne({'title':''+req.body.item}, function (err, res){
+			 if(!error){
+					 console.log(res);
+				}
+			 else if(!req){
+				 res.send('no data recieved');
+			 }
+			 else{
+				res.send(err);
+			}
+		})
+});
 
-*/
-
-function validateForm() {
-    var u = document.forms["admin_login"]["u"].value;
-    var p = document.forms["admin_login"]["p"].value;
-
-    if (u != "admin" && p != "admin") {
-        alert("Invalid username or password");
-        return false;
-    }
-    
-}
+	                                                                                                 
+module.exports = router;
