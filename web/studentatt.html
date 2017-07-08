@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 18px;
+  margin-left: 60px;
+}
+.switch input {display:none;}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 15px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #4CAF50;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px #4CAF50;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(25px);
+  -ms-transform: translateX(25px);
+  transform: translateX(25px);
+}
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+<script>
+    angular.module('datepickerBasicUsage', ['ngMaterial', 'ngMessages']).controller('AppCtrl', function() {
+  this.myDate = new Date();
+  this.isOpen = false;
+});
+    </script>
+</head>
+<body>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+      <br>
+
+    <p>Date  <input type="text" id="datepicker"></p>
+<br>
+
+<table style="text-align:center;">
+  <tr>
+    <th>Student Name</th>
+    <th>School <span class="glyphicon glyphicon-education" aria-hidden="true"></span></th>
+    <th>Sports <span class="glyphicon glyphicon-knight" aria-hidden="true"></span></th>
+    <th>Music/Dance <span class="glyphicon glyphicon-music" aria-hidden="true"></span></th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td><label class="switch">
+      <input type="checkbox">
+      <div class="slider round"></div>
+      </label>
+    </td>
+    <td><label class="switch">
+        <input type="checkbox">
+        <div class="slider round"></div>
+        </label>
+    </td>
+    <td><label class="switch">
+        <input type="checkbox">
+        <div class="slider round"></div>
+        </label>
+    </td>
+  </tr>
+
+</table>
+
+
+</body>
+</html>
