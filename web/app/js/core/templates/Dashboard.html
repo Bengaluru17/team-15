@@ -1,0 +1,538 @@
+<style type="text/css">
+  a:hover {
+    cursor:pointer;
+  }
+  span:hover {
+    cursor:pointer;
+  }
+  .books:hover{
+    cursor: pointer;
+  }
+</style>
+
+<div  ng-controller = "DashCtrl" data-ng-init="onload()">
+  <div id="navbar" style="left:0;">
+    <h2 ng-show="pageload" class="pageloading"> {{loadingText}} <span class="saving"><span>.</span><span>.</span><span>.</span></span></h2>
+    <nav class="navbar navbar-inverse" ng-show="!pageload">
+    <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a ng-click="goBack()">Hello {{username}} <!--  <span class="saving" ng-show="fetching==true"><span>.</span><span>.</span><span>.</span></span> -->
+</a></li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+       <div class="form-group">
+         <input class="form-control" placeholder="Search for anything" type="text" ng-change="showSearchResults()" ng-model="globalSearch">
+         <button ng-show="globalSearch" type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#myReqModal">Request this book</button>
+       </div>
+     </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a ng-click="library()">My library</a></li>
+        <li><a ng-click="MyAdds()">My adds</a></li>
+        <li><a style="cursor:pointer" ng-click="openNav()">Profile</a></li>
+        <li><a style="cursor:pointer" ng-click="logOut()">Sign Out</a></li>
+      </ul>
+
+    </div>
+  </nav>
+  </div>
+
+  <div id="Sidenavbar" class="sidenavbar">
+    <!--<a ui-sref="/dashboard">Catergories</a>-->
+    <div class="categories" style="top:0;position:absolute">
+    <div class="form-group">
+      <label class="col-lg-2 control-label" style="color:black;width:100%;margin-top=0%;color:rgba(204, 153, 0 ,1)">Filter By Category</label>
+      <label class="col-lg-12 control-label"></label>
+      <div class="col-lg-4" style="width:100%;margin-left:0%;position:absolute;margin-top:18%;">
+        <div class="radio" ng-repeat = "type in categories" style="margin-left:0;color:rgba(204, 153, 0 ,1)">
+          <label style="position:relative;left:10%;"><b>
+            <input
+            value="{{type.category}}"
+            name = "{{type.category}}"
+            type="checkbox"
+            ng-model="ischecke"
+            ng-change="onCategorySelect(type.category)">
+           {{type.category}}
+          </b>
+          </label>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+<div id="mySidenav" class="sidenav" >
+  <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
+  <a ng-click="profile()">My profile</a>
+  <a ng-click="PostRequests()">Post requests</a>
+  <a href="#">Request messages</a>
+</div>
+<div>
+    <div  ng-if="isDash" style="text-align:center;">
+      <div class="top-tabs">
+        <ul class="nav nav-tabs row">
+          <li class="col-sm-6" ><a data-toggle="tab" ng-click="onRecomAdds()" >Recommended Adds</a></li>
+          <li class="col-sm-6" ><a data-toggle="tab" ng-click="onRecomReq()" > Recommended Requests</a></li>
+        </ul>
+      </div>
+
+    <div class="container dash-table" >
+      <div ng-show="isAdds">
+        <div class="row">
+            <div ng-repeat="book in recBooks | filter:filterAllBooks">
+                <div class="col-md-6">
+                    <div id="{{book._id}}" ng-click="showBookDetails(book)" data-toggle="modal" data-target="#myModal">
+                        <div class="panel-heading"><h3 class="panel-title">Book {{book.title}}</h3></div>
+                        <div class="panel-body">
+                            Genre  :  {{book.genre}} <br>
+                            Author : {{book.author}} <br>
+                            Id     : {{book._id}} <br>
+                            Status : {{book.status}}<br>
+                       </div>
+                  </div>
+               </div>
+            </div>
+        </div>
+
+      </div>
+      <div ng-if="isReq">
+        <div class="row">
+            <div ng-repeat="book in myreqBooks">
+                <div class="col-md-6">
+                    <div  class="panel panel-danger"  >
+                        <div class="panel-heading"><h3 class="panel-title">{{book.title}}</h3>
+                        <span ng-click="onAdvertise(book)"> Advertise </span>
+                        </div>
+                        <div class="panel-body">
+                            Genre  :  {{book.genre}} <br>
+                            Author : {{book.author}} <br>
+                        <!--<button type="button" class="btn btn-success btn-sm" style="float:right;" ng-click="onAdvertise(book)">Advertise</button>-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  <div ng-if="isMyAdds" class="myadds">
+    <div class="top-tabs">
+      <ul class="nav nav-tabs row">
+        <li class="col-sm-6" ><a data-toggle="tab" ng-click="onRentTab()" >Books on Rent</a></li>
+        <li class="col-sm-6" ><a data-toggle="tab" ng-click="onSellTab()" > Books for selling</a></li>
+      </ul>
+    </div>
+
+      <div class="container adds-table" >
+    <div ng-if="isRent">
+      <div class="row">
+          <div ng-repeat="book in myRentBooks">
+              <div class="col-md-4">
+                  <div id="{{book.id}}" class="panel panel-primary">
+                      <div class="panel-heading"><h3 class="panel-title">Book {{book.bookInfo.title}}</h3>
+                      </div>
+                      <div class="panel-body">
+                          Genre  :  {{book.bookInfo.genre}} <br>
+                          Author : {{book.bookInfo.author}} <br>
+                          Id     : {{book.bookInfo.id}} <br>
+
+                  </div>
+
+              </div>
+          </div>
+      </div>
+
+  </div>
+    </div>
+    <div ng-if="isSell">
+      <div class="row">
+          <div ng-repeat="book in mySoldBooks">
+              <div class="col-md-4">
+                  <div  class="panel panel-danger">
+                      <div class="panel-heading"><h3 class="panel-title">Book {{book.bookInfo.title}}</h3>
+                      </div>
+                      <div class="panel-body">
+                          Genre  :  {{book.bookInfo.genre}} <br>
+                          Author : {{book.bookInfo.author}} <br>
+                          Id     : {{book.bookInfo.id}} <br>
+
+                  </div>
+
+              </div>
+          </div>
+      </div>
+
+  </div>
+    </div>
+    </div>
+
+  </div>
+  <div ng-if="isPostRequests">
+      post requests
+  </div>
+
+
+  <div ng-if="isProfile">
+    <div id="updateprofile" class="jumbotron profile">
+    <div class="container-fluid">
+      <div style="color:black;font-size:200%;">My profile &nbsp;&nbsp;
+        <a ng-click="editDetails()"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:green;font-size:100%;"></span></a>
+      </div>
+        <div class="form-group"  ><br/>
+          <label class="col-lg-2 control-label" > <b>Name: </b></label>
+          <input  id="newname" class="emailInput" type="text" placeholder="New Name .?" style="width:50%;" value="{{username}}" ng-show="editRequested==true">
+          <div class="col-lg-10" ng-show="editRequested==false">
+          {{username}}
+          </div>
+        </div>
+        <div class="form-group"  ><br/>
+          <label class="col-lg-2 control-label" ><b>Phone: </b></label>
+          <input id="newphone" class="emailInput" type="text" placeholder="New Phone Number.?" style="width:50%;" value="{{userData.phoneNum}}" ng-show="editRequested==true">
+          <div class="col-lg-10" ng-show="editRequested==false">
+            {{userData.phoneNum}}
+          </div>
+        </div>
+        <div class="form-group"><br/>
+          <label class="col-lg-2 control-label" ><b>Email: </b></label>
+          <input class="emailInput" type="text" placeholder="New Phone Number.?" style="width:50%;" ng-show="editRequested==true" value="{{userData.email}}" disabled="true">
+          <div class="col-lg-10" ng-show="editRequested==false">
+            {{userData.email}}
+          </div>
+        </div>
+        <div class="form-group"><br/>
+          <label class="col-lg-2 control-label"><b>Place : </b></label>
+          <input id="newplace" class="emailInput" type="text" placeholder="Place.?" style="width:50%;" value="{{userData.place}}" ng-show="editRequested==true">
+          <div class="col-lg-10" ng-show="editRequested==false">
+            {{userData.place}}
+          </div>
+        </div>
+        <div class="form-group"><br/>
+          <label class="col-lg-2 control-label"><b>Interests:</b></label> <br/>
+          <div ng-repeat="interest in interests" ng-model="interests" ng-show="editRequested==true">
+            <div class="interests">
+              {{interest}} <a ng-click="removeInterest(interest)"><span style="color:red;float:right;" class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            </div>
+          </div> <br/>
+          <input id="newinterest" class="btn btn-default" type="text" placeholder="Add New intrests.?" style="width:50%;" ng-show="editRequested==true">
+          <a ng-click="addInterest()" class="btn btn-default" ng-show="editRequested==true">Add <span style="color:green;" class="glyphicon glyphicon-plus" aria-hidden="true" ></span></a>
+          </div>
+          <div ng-repeat="interest in interests" ng-model="interests" ng-show="editRequested==false" >
+            <div>
+              {{interest}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group" ng-show="editRequested==false"><br/>
+          <label class="col-lg-2 control-label"><b>Type: </b> </label>
+          <div class="col-lg-10">
+            {{registeredAs}}
+          </div>
+        </div>
+        <div class="form-group" ng-show="editRequested==true">
+          <label class="col-lg-2 control-label">Type: ?</label>
+          <div class="col-lg-10">
+            <input name="optionsRadios" value="Student" checked="" type="radio" ng-model = "radioValue" ng-change="onChoiceSelect('Student')">
+            Student &nbsp;&nbsp;
+            <input name="optionsRadios" value="Professional" type="radio" ng-model = "radioValue" ng-change = "onChoiceSelect('Professional')">
+            Professional
+          </div>
+        </div>
+
+        <div ng-show="studentChecked == true">
+          <div class="form-group">
+            <label class="col-lg-2 control-label" ></label>
+            <div class="col-lg-10">
+              <input id="newcollege" class="form-control" id="inputCollege" placeholder="Which college are you from? " type="text">
+            </div>
+          </div>             <div class="col-lg-10"></div>
+
+          <div class="form-group">
+            <label class="col-lg-2 control-label" ></label>
+            <div class="col-lg-10">
+              <input id="newbranch" class="form-control" id="inputBranch" placeholder="Which branch do you belong to ? " type="text">
+            </div>
+          </div>             <div class="col-lg-10"></div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label" ></label>
+            <div class="col-lg-10">
+              <input id="newsem" class="form-control" id="inputSem" placeholder="Your semester .?" type="text">
+            </div>
+          </div>              <div class="col-lg-10"></div>
+        </div>
+
+        <div ng-show="profChecked == true">
+              <input id="newjob" class="emailInput" id="inputjob" placeholder="What do you do ? " type="text">
+        </div>
+
+        <div ng-show="isStudent==false && editRequested==false">
+          <div class="form-group"><br/>
+            <label class="col-lg-2 control-label"><b>Job: </b> </label>
+            <div class="col-lg-10">
+              {{job}}
+            </div>
+          </div>
+       </div>
+
+       <div ng-show="isStudent==true && editRequested==false">
+           <div class="form-group"><br/>
+             <label class="col-lg-2 control-label"><b>College: </b> </label>
+             <div class="col-lg-10">
+               {{college}}
+             </div>
+           </div>
+             <div class="form-group"><br/>
+               <label class="col-lg-2 control-label"><b>Branch: </b> </label>
+               <div class="col-lg-10">
+                 {{branch}}
+             </div>
+           </div>
+           <div class="form-group"><br/>
+             <label class="col-lg-2 control-label"><b>Sem: </b> </label>
+             <div class="col-lg-10">
+               {{sem}}
+           </div>
+         </div>
+      </div>
+      <div id="updateButton" ng-show="editRequested==true">
+          <button type="submit" class="btn btn-success" ng-click="updateDetails()">{{buttonVal}} <span class="saving" ng-show="updating==true"><span>.</span><span>.</span><span>.</span></span></button>
+          <button type="button" class="btn btn-primary" ng-click="cancelEdit()">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <div ng-if="isLibrary" class="jumbotron library">
+     <h1 ng-show="loading"> Fetching Your library Books<span class="saving"><span>.</span><span>.</span><span>.</span></span> </h1>
+    <div ng-if="isSearch && !loading">
+    <div id="libHeader" class="lib-header">
+      <form class="navbar-form navbar-left" role="search">
+       <div class="form-group">
+         <input class="form-control" placeholder="Title/Genre/Author/ID" type="text" ng-model="search" id="searchValue">
+       </div>
+       <select class="form-control" name="selector" id="select" ng-model="select">
+         <option>romance</option>
+         <option>child</option>
+         <option>ohhh</option>
+         <option>ada</option>
+         <option></option>
+       </select>
+        <br>
+        <br>
+      </form>
+
+
+    </div>
+    <div class="lib-content">
+      <div class="row">
+          <div ng-repeat="book in myLibBooks | filter: searchBooks">
+              <div class="col-md-4">
+                  <div id="{{book.id}}" class="panel panel-warning">
+                      <div class="panel-heading">
+                        <span ng-click="onSellBook(book)" ng-show="!isSelect && !loading" class="glyphicon glyphicon-shopping-cart"></span>
+                        <span ng-show = "!isSelect" ng-click = "onDeleteSingle(book.bookInfo.id)" class="glyphicon glyphicon glyphicon-trash"></span>
+                        <input ng-show="isSelect" ng-click = "onDelete(book.bookInfo.id)" type="checkbox" style="float:right;">
+                          <h3 class="panel-title">Book {{book.bookInfo.title}}</h3>
+                      </div>
+                      <div class="panel-body">
+                          Genre  :  {{book.bookInfo.genre}} <br>
+                          Author : {{book.bookInfo.author}} <br>
+                          Id     : {{book.bookInfo.id}} <br>
+                          <span ng-click="onRentBook(book)" class="glyphicon glyphicon-share share"></span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>
+</div>
+<div ng-show="isAddBook && !loading" class="addbook">
+  <!-- <h2>Modal Example</h2>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+  <div ng-show="isAddBook" class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Book Details</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="control-label" for="focusedInput">Book Title</label>
+            <input class="form-control" id="booktitle" type="text">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="focusedInput">Author</label>
+            <input class="form-control" id="bookauthor" type="text">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="focusedInput">Genre</label>
+            <input class="form-control" id="bookgenre" type="text" >
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="focusedInput">Isbn No.</label>
+            <input class="form-control" id="bookisbn" type="text">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="onCancel()">Cancel</button>
+          <a ng-click="onAddBook()" id="addbook" class="btn btn-primary" value="add" ng-show="!loading">{{add}} <span class="saving" ng-show="updatingAdd==true"><span>.</span><span>.</span><span>.</span></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div ng-show="isAddBook && !loading" class="addbook">
+  <div class="form-group">
+    <label class="control-label" for="focusedInput">Book Title</label>
+    <input class="form-control" id="booktitle" type="text">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="focusedInput">Author</label>
+    <input class="form-control" id="bookauthor" type="text">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="focusedInput">Genre</label>
+    <input class="form-control" id="bookgenre" type="text" >
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="focusedInput">Isbn No.</label>
+    <input class="form-control" id="bookisbn" type="text">
+  </div>
+</div> -->
+    <a ng-click="selectBooks()" class="btn btn-primary" ng-show="!loading && !isAddBook">Select</a>
+    <a ng-click="onDeleteSubmit()" class="btn btn-primary" ng-show="!loading && !isAddBook"> Delete</a>
+
+
+    <a ng-click="onAddBook()" id="addbook" class="btn btn-primary" value="add" ng-show="!loading" data-toggle="modal" data-target="#addModal">{{add}} <span class="saving" ng-show="updatingAdd==true"><span>.</span><span>.</span><span>.</span></span></a>
+    <!-- <a ng-click="onCancel()" class="btn btn-primary" ng-show="!loading && isAddBook"> CANCEL</a> -->
+
+</div>
+
+<div ng-show="showallBooks" class="allBooks">
+  <div class="row">
+      <div ng-repeat="book in allBooks | filter:filterAllBooks">
+          <div class="col-md-4">
+              <div id="{{book._id}}" ng-click="showBookDetails(book)" class="books" data-toggle="modal" data-target="#myModal">
+                  <div class="panel-heading"><h3 class="panel-title">Book {{book.title}}</h3></div>
+                  <div class="panel-body">
+                      Genre  :  {{book.genre}} <br>
+                      Author : {{book.author}} <br>
+                      Id     : {{book._id}} <br>
+                      Status : {{book.status}}<br>
+                 </div>
+            </div>
+         </div>
+      </div>
+  </div>
+</div>
+<div class="container">
+  <!-- <h2>Modal Example</h2>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Book Details</h4>
+        </div>
+        <div class="modal-body">
+          <div class="panel-body">
+            <h2> Added By: </h2>
+            <div ng-repeat="users in addedBy">
+              <div style="padding-top:20px;">
+              {{users}}
+              <button type="button" class="btn btn-success btn-sm" style="float:right;" ng-click="buyBook(users)">Buy now</button>
+               </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="container">
+    <div class="modal fade" id="myReqModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Book Request Details</h4>
+          </div>
+          <div class="modal-body">
+            <div class="panel-body">
+
+
+            <div class="form-group">
+              <label class="control-label" for="focusedInput">Book Title</label>
+              <input class="form-control" id="reqtitle" type="text" >
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="focusedInput">Author</label>
+              <input class="form-control" id="reqauthor" type="text" v>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="focusedInput">Genre</label>
+              <input class="form-control" id="reqgenre" type="text" >
+            </div>
+              <button type="button" id = "reqbutton" class="btn btn-success btn-sm" style="float:right;" ng-click="onReqbook()" data-dismiss="modal">Request Book</button>
+</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Chat -->
+<div ng-show="toChat">
+<div class="chat_window">
+  <div class="top_menu">
+    <!--<div class="buttons">
+      <div class="button close"></div>
+      <div class="button minimize"></div>
+      <div class="button maximize"></div></div>-->
+      <div class="title">Chat <li id = "notifBar" align="right"></li>
+        <!-- <input type="text" placeholder="client ID" id="notiId"></input>
+
+        <input type="button" value = "Send Notif" ng-click="sendNotif()" align="left"></input> -->
+        <span class="glyphicon glyphicon-remove" style="float:right;color:black;font-size:80%;" ng-click="closeChat()"></span>
+        <button value="mybutton" type="button"  id="mbut">Send</button>
+      </div>
+   </div>
+      <ul class="messages" id="messages">
+      </ul>
+      <div class="bottom_wrapper clearfix">
+        <div class="message_input_wrapper">
+          <form method="" id="sub">
+          <input class="message_input" placeholder="Send a message" id="m" />
+
+        </form>
+
+        </div>
+        <!--<div class="send_message"><div class="icon"></div>-->
+        <!--<div class="text">Send</div></div>-->
+      </div>
+</div>
+<div class="message_template">
+  <li class="message">
+      <!--<div class="avatar"></div>-->
+       <div class="text_wrapper">
+        <div class="text"></div>
+      </div>
+  </li>
+</div>
+</div>
+<!--/chat-->
