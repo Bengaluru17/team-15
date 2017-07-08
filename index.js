@@ -33,7 +33,7 @@ router.post('/additems', function (req, res) {
         item: req.body.item,
         quantity: req.body.amount,
         amount: req.body.quantity,
-        shopped: false,
+        
 
     }, function(err, data) {
         if (!err) {
@@ -133,8 +133,37 @@ router.post('/addedu',function(req, res){
 	})
 });
 
-//router.post('/buy', function(req, res){
-//	db.collection()
-//})
+router.post('/buy', function(req, res){
+	db.collection('buying').insertOne({
+		name: req.body.name,
+		item: req.body.item,
+	}, function(err, dat){
+		if(!err && dat){
+			db.collection('inventory').remove({name:req.body.name}, 1);
+			res.send({
+				"status": "success"
+			});
+		}
+		else if(!err && !dat){
+			res.send('no data input');
+		}
+		else{
+			res.send({
+				"status": "Failed"
+			});
+		}
+	})
+});
+
+router.post('/bought', function(req, res){
+	if(err){
+		res.send({
+				"status": "Failed"
+			});
+		}
+	else{
+		db.collection('buying').remove({name:req.body.name}, 1);
+	}
+});
 
 module.exports = router;
