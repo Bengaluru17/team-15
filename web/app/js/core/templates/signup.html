@@ -27,10 +27,10 @@
             <div ng-if="!showitems" class="center_content" ng-app="supplies">
                 <div class="half-width">
                     <form>
-                        <p>Name <input type="text" ng-model="name" required></p>
-                        <p>Item <input type="text" ng-model="item" required></p>
-                        <p>Quantity <input type="number" ng-model="quantity" required></p>
-                        <p>Amount <input type="number" ng-model="amount" required></p>
+                        <p>Name <input type="text" id="name" required></p>
+                        <p>Item <input type="text" id="item" required></p>
+                        <p>Quantity <input type="number" id="quantity" required></p>
+                        <p>Amount <input type="number" id="amount" required></p>
                         <input type="submit" value="Submit" ng-click="onAddedItem()">
                     </form>
                 </div>
@@ -41,65 +41,24 @@
             </div>
             <div ng-if="showitems">
                 <h3>Items to Buy</h3>
-                <div class="jumbotron" ng-repeat="item in items">
+                <div ng-repeat="item in items">
                     <table class="table table-striped table-hover ">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Column heading</th>
-                                <th>Column heading</th>
-                                <th>Column heading</th>
-                            </tr>
-                        </thead>
+
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.amount}}</td>
+                                <td>{{item.item}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td><a href="#" class="btn btn-primary" ng-click="buyItem(item)">Buy this</a></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="info">
-                                <td>3</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="success">
-                                <td>4</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="danger">
-                                <td>5</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="warning">
-                                <td>6</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
-                            <tr class="active">
-                                <td>7</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                                <td>Column content</td>
-                            </tr>
+
                         </tbody>
                     </table>
-                    <p>{{item.name}}</p>
 
-                    <p><a class="btn btn-primary btn-lg" ng-click="onAddItem()">Add item</a></p>
+
                 </div>
+                <p><a class="btn btn-primary btn-lg" ng-click="onAddItem()">Add item</a></p>
             </div>
 
         </div>
