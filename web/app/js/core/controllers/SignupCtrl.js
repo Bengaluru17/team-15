@@ -3,4 +3,7 @@ app.controller('SignCtrl', ['$scope', '$state', 'authUser', function($scope, $st
     $scope.onAddItem = function() {
         $scope.showitems = false;
     }
+    $scope.onAddedItem = function() {
+        $scope.showitems = true;
+    }
 }]);
