@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/inventory.js"></script>
+    <script type="text/javascript" src="inventory.js"></script>
+
     <title>Reaching hands</title>
 
     <!-- Bootstrap Core CSS
@@ -35,25 +39,45 @@
             </div>
         </header>
         <!-- Navigation -->
-        <nav class="x-nav">
+        <!--<nav class="x-nav">
             <ul class="nav-custom">
                 <li class="nav-item nav-active"><a href="inventory.html">Inventory</a></li>
                 <li class="nav-item"><a href="request.html">Approval Request</a></li>
                 <li class="nav-item"><a href="attendance.html">Attendance</a></li>
             </ul>
-        </nav>
+        </nav>-->
         <div id="page_heading">
             <p>See what's in store!</p>
         </div>
         <!-- Main Content -->
         <div class="container">
-            <div class="sidenav">
+            <!--<div class="sidenav">
                 <a href="#" class="sidenav-active">Boys</a>
                 <a href="#">Girls</a>
                 <a href="#">Kitchen</a>
+            </div>-->
+            <div class="center_content" ng-app="supplies">
+                <div class="half-width" ng-app="">
+                <form >
+                <p>Name <input type="text" ng-model="name" required></p>
+                <p>Item <input type="text" ng-model="item" required></p>
+                <p>Quantity <input type="number" ng-model="quantity" required></p>
+                <p>Amount <input type="number" ng-model="amount" required></p>
+                <input type="submit" value="Submit" onclick="window.location.reload()">
+                </form>
+                </div>
+
+                <div class="half-width" ng-app="">
+                <form >
+                <p>AdminID <input type="text" ng-model="username" required></p>
+                <p>Password <input type="password" ng-model="password" required></p>
+                <input type="submit" value="Login" onclick="">
+                </form>
+                </div>
+
+
             </div>
-            <div class="center_content">
-            </div>
+
         </div>
         <!-- Footer -->
         <footer>
@@ -95,3 +119,4 @@
 </body>
 
 </html>
+
