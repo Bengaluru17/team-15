@@ -11,6 +11,7 @@ router.get('/welcome', function(req, res, next) {
 });
 
 router.get('/getitems', function (req, res){
+
 	      db.collection('inventory').find({}).toArray(function(err, data) {
         if (!err && data) {
             console.log(data);
@@ -166,3 +167,4 @@ router.post('/bought', function(req, res){
 });
 
 module.exports = router;
+

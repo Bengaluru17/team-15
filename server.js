@@ -27,7 +27,9 @@ app.get("/", function (req, res) {
 	    res.sendFile(__dirname + '/home.html');
 })
 
-app.post('/inventory', function (req, res){
+
+app.get('/getitems', function (req, res){
+
 	  // Get the inventory collection
 		 
 		// Find the items
@@ -40,5 +42,6 @@ app.post('/inventory', function (req, res){
 						}
 				})
 	 });
+
 
 
