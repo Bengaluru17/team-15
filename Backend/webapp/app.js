@@ -27,13 +27,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var MongoClient = require('mongodb').MongoClient;
 
-dbURL = "mongodb://localhost:27017/gridlock";
+dbURL = "mongodb://localhost:27017/reachinghand";
 // Connect to the db
 MongoClient.connect(dbURL, function(err, database) {
     if (!err) {
-        console.log("connected to gridlockDB ");
+        console.log("connected to ReachinghandDB ");
         db = database;
-    }
+    } else if (err) {
+        console.log("error");
+    };
 });
 
 app.use(cors());

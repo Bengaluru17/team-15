@@ -6,19 +6,7 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/users/test', function(req, res, next) {
-    res.send('respond with a ohhhh');
-});
-
-router.get('/users/admin', function(req, res, next) {
-    res.send('respond with a ohhhh');
-});
-
-router.get('/users/panel', function(req, res, next) {
-    res.send('respond with a ohhhh');
-});
-
-router.get('/users/approve', function(req, res, next) {
+router.get('/test', function(req, res, next) {
     res.send('respond with a ohhhh');
 });
 
