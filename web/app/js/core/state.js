@@ -34,6 +34,18 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/admin',
             templateUrl: 'app/js/core/templates/admin.html'
         })
+        .state('donation', {
+            url: '/donations',
+            templateUrl: 'app/js/core/templates/donations.html'
+        })
+        .state('education', {
+            url: '/education',
+            templateUrl: 'app/js/core/templates/education.html'
+        })
+        .state('inventory', {
+            url: '/inventory',
+            templateUrl: 'app/js/core/templates/inventory.html'
+        })
         .state('resetPass', {
             url: '/resetpsswd/{email}',
             templateUrl: 'app/js/core/templates/resetpassword.html',
