@@ -122,7 +122,7 @@ nav{
 	border-right:1px solid #9a582d;
 }
 .nav-item{
-	width:calc((100%/9) - 1px);
+	width:calc((100%/6) - 1px);
 	position:relative;
 	float:left;
 	background:#E45641;
@@ -188,7 +188,7 @@ nav{
     width: calc(25% - 15px); /* 0 width - change this with JavaScript */
     position: relative; /* Stay in place */
 	float:left;
-    background-color: #bfbab0; 
+    background-color: #bfbab0;
     overflow-x: hidden; /* Disable horizontal scroll */
 	padding-bottom:20px;	/* Place content 60px from the top */
 	margin-left:15px;
@@ -246,8 +246,8 @@ nav{
 
 /*styles for center content */
 .center_content{
-    float: left;
-	width:75%;
+    text-align: center;
+	width:100%;
     display: block;
 	position:relative;
 }
@@ -274,7 +274,7 @@ footer {
 	overflow:hidden;
 	background-color: #111;
 	display:block;
-	
+
 }
 
 .footrow2{
@@ -374,7 +374,7 @@ table {
 table, th, td {
 	border: 1px solid #ddd;
 	border-collapse: collapse;
-	
+
 }
 th, td {
 	border: 1px solid #999;
@@ -394,3 +394,48 @@ th {
 	color: white;
 	padding: 10px;
 }
+
+input[type=text], select {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+        input[type=number], select {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit] {
+    width: 70%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    float: left;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
