@@ -11,9 +11,9 @@ router.get('/welcome', function(req, res, next) {
 });
 
 router.get('/getitems', function (req, res){
-	      db.collection('inventory').findOne({}, function (err, res) {
-			     if (!err && res) {
-			        res.send(res);
+	      db.collection('inventory').findOne({}, function (err, dat) {
+			     if (!err && dat) {
+			        res.send(dat);
 			     }
 			     else {
 			        res.send(err);
@@ -21,9 +21,9 @@ router.get('/getitems', function (req, res){
 			  })
 		});
 router.post('/additems', function (req, res) {
-	  db.collection('inventory_to_approve').addOne({'title':''+req.body.item,'flag':false}, function (err, res){
+	  db.collection('inventory_to_approve').insertOne({'title':''+req.body.item,'flag':false}, function (err, dat){
 			 if(!err){
-					 res.send(res);
+					 res.send(dat);
 				}
 			 else if(!req){
 				 res.send('no data recieved');
@@ -35,24 +35,46 @@ router.post('/additems', function (req, res) {
 });
 
 router.get('/admin/inventory', function (req, res) {
-	db.collection('inventory_to_approve').findOne({'flag':false}, function(err, res){
+	db.collection('inventory_to_approve').findOne({'flag':false}, function(err, dat){
 		if (!err) {
-			res.send(res);
+			res.send(dat);
 		}
 	})
 });
 
 router.post('/getitems',function (req, res){
-	db.collection('inventory_to_approve').findOne({'flag':true}, function(err, res){
-		if (!err && res){
-			db.collection('inventory').update({}, function(err, res){
+	db.collection('inventory_to_approve').findOne({'flag':true}, function(err, dat){
+		if (!err && dat){
+			db.collection('inventory').update({}, function(err, dat1){
 				if (!err) {
-					res.send(res);
+					res.send(dat1);
 				}
 			})
 		}
 	})
 });
 
-                 
+router.get('/education',function (req, res){
+	db.collection('academics').findOne({}, function(err, dat){
+		if(!err && dat){
+			res.send(dat);
+		}
+	})
+});
+
+router.post('/addedu',function(req, res){
+	db.collection('academics').insertOne({}, function(err, dat){
+		if(!err && dat){
+			res.send(res);
+		}
+		else if(!err && !dat){
+			res.send('no data input');
+		}
+		else{
+			res.send(err);
+		}
+	})
+});
+
+
 module.exports = router;
