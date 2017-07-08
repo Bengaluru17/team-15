@@ -1,129 +1,83 @@
-<style type="text/css">
-  a:hover {
-    cursor:pointer;
-  }
-</style>
+<div id="mainPart">
+    <div>
+        <!-- Header part to be added later -->
+        <header>
+            <div class="head-content">
+                <h1>Reaching Hand:Web connect portal</h2>
+            </div>
+        </header>
+        <!-- Navigation -->
+        <!--<nav class="x-nav">
+            <ul class="nav-custom">
+                <li class="nav-item nav-active"><a href="inventory.html">Inventory</a></li>
+                <li class="nav-item"><a href="request.html">Approval Request</a></li>
+                <li class="nav-item"><a href="attendance.html">Attendance</a></li>
+            </ul>
+        </nav>-->
+        <div id="page_heading">
+            <p>See what's in store!</p>
+        </div>
+        <!-- Main Content -->
+        <div class="container">
+            <!--<div class="sidenav">
+                <a href="#" class="sidenav-active">Boys</a>
+                <a href="#">Girls</a>
+                <a href="#">Kitchen</a>
+            </div>-->
+            <div ng-if="!showitems" class="center_content" ng-app="supplies">
+                <div class="half-width">
+                    <form>
+                        <p>Name <input type="text" ng-model="name" required></p>
+                        <p>Item <input type="text" ng-model="item" required></p>
+                        <p>Quantity <input type="number" ng-model="quantity" required></p>
+                        <p>Amount <input type="number" ng-model="amount" required></p>
+                        <input type="submit" value="Submit" ng-click="onAddItem()">
+                    </form>
+                </div>
 
-<div ng-controller="SignCtrl">
-<form class="form-horizontal">
-  <div class="signupHeadingCreate">Join Book Share</div>
-  <h6 style=" position: absolute;left:35%;top:4%;font-size:120%;">The best place to buy, sell, and rent books.</h6> <br>
-  <a style="color:black;" ng-click="backToHome()">
-      <span style="color:black;font-size:30px;" class="glyphicon glyphicon-home"></span>
-  </a>
-  <fieldset id="interests">
-    <div class="form-group"  ><br/>
-      <label class="col-lg-2 control-label" >Name <span class="required">*<span></label>
-      <div class="col-lg-10">
-        <input class="signupInput" id="inputName" placeholder="What can I call you ? " type="text" required >
-      </div>
-    </div>
-    <div class="form-group"  ><br/>
-      <label class="col-lg-2 control-label" >Phone Number <span class="required">*</span></label>
-      <div class="col-lg-10">
-        <input class="signupInput" id="inputNumber" placeholder="Where can I text you.? " type="number" required >
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-lg-2 control-label" >Email <span class="required">*</span></label>
-      <div class="col-lg-10">
-        <input class="signupInput" id="inputEmail" placeholder="Where can I send you a mail ? " type="email" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label">Password <span class="required">*</span></label>
-      <div class="col-lg-10">
-        <input class="signupInput" id="inputPassword" placeholder="Password" type="password" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label">Confirm Password <span class="required">*</span></label>
-      <div class="col-lg-10">
-        <input class="signupInput" id="inputRePassword" placeholder="Confirm Password" type="password" required>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-lg-2 control-label" >Place</label>
-      <div class="col-lg-10">
-        <input class="signupInput" id="inputPlace" placeholder="Where do you live ?" type="text">
-      </div>
-    </div>
 
-    <div class="form-group" required>
-      <label class="col-lg-2 control-label">What Are You? <span class="required">*</span></label>
-      <div class="col-lg-10">
-        <div class="radio">
-          <label>
-            <input name="optionsRadios"  value="Student" checked="" type="radio" ng-model = "radioValue" ng-change="onChoiceSelect()">
-            Student
-          </label>
+
+            </div>
+            <div ng-if="showitems">
+                <div class="jumbotron">
+                    <h1>Jumbotron</h1>
+                    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <p><a class="btn btn-primary btn-lg">Add item</a></p>
+                </div>
+            </div>
+
         </div>
-        <div class="radio">
-          <label>
-            <input name="optionsRadios" value="Professional" type="radio" ng-model = "radioValue" ng-change = "onChoiceSelect()">
-            Professional
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label"> {{radioValue}}</label>
-      <div class="col-lg-10">
-      </div>
-    </div>
-    <div ng-show="isStudent">
-      <div class="form-group">
-        <label class="col-lg-2 control-label" >College </label>
-        <div class="col-lg-10">
-          <input class="signupInput" id="inputCollege" placeholder="Which college are you from? " type="text">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-lg-2 control-label" > Branch </label>
-        <div class="col-lg-10">
-          <input class="signupInput" id="inputBranch" placeholder="Which branch do you belong to ? " type="text">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPassword" class="col-lg-2 control-label"> Semester </label>
-        <div class="col-lg-10">
-          <input class="signupInput" id="inputSem" placeholder="Your semester .?" type="text">
-        </div>
-      </div>
-    </div>
-    <div ng-show="isProfessional">
-      <div class="form-group">
-        <label class="col-lg-2 control-label" > Nature of job </label>
-        <div class="col-lg-10">
-          <input class="signupInput" id="inputjob" placeholder="What do you do ? " type="text">
-        </div>
-      </div>
+        <!-- Footer -->
+        <footer>
+            <div class="footrow">
+                <div class="foot">
+                    <div class="quarter-width">
+                        <p style="color:#fff;">Address</p>
+                        <hr>
+                        <div>
+                            No. 44, 1st Floor Nehru Road, Above Syndicate Bank Yadava Layout, Arvind Nagar St. Thomas Town Post Bangalore - 560 084,India
+                            <hr> Phone: +91 08041677874 , +91 9972584243
+                            <hr> Email: <a href="mailto:info@reachinghand.org">info@reachinghand.org</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footrow2">
+                <div class="foot">
+                    <div class="half-width">
+                        <p class="foot-p">&copy; JPMC CFG</p>
+                    </div>
+                    <div class="half-width">
+                        <p style="float:right !important;" class="foot-p">Developed &amp; maintained "JPMC"</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- jQuery
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>-->
     </div>
 
-    <div class="form-group">
-      <label class="col-lg-2 control-label">Your Interests ?</label>
-      <label class="col-lg-12 control-label"></label>
-      <div class="col-sm-4">
-        <div class="radio" ng-repeat = "type in intrests">
-          <label style="position:relative;left:40%;"><b>
-            <input
-            value="{{type.category}}"
-            name = "{{type.category}}"
-            type="checkbox"
-            ng-model="ischecke"
-            ng-change="onIntrestSelect(type.category)">
-           {{type.category}}
-          </b>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="submit" class="btn btn-success" ng-click="onSubmitButton()" style="position:relative;left:40%;">Join</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
 </div>
