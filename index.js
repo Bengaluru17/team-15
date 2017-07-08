@@ -62,7 +62,7 @@ router.get('/admin/inventory', function (req, res) {
         	
 
         	//check if its correct	
-        	db.collection('inventory_to_approve').remove({}, 1);
+        	db.collection('inventory_to_approve').remove({name:req.body.name}, 1);
 
             
             res.send({"status": "success"});
