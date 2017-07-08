@@ -35,6 +35,9 @@ app.controller('SignCtrl', ['$scope', '$state', 'authUser', function($scope, $st
         //         console.log("error");
         //     });
     }
+    $scope.reqitem = function() {
+
+    }
     $scope.onAdditem = function() {
         var newItem = {
             name: $("#name").val(),
