@@ -34,6 +34,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // CONCATENATED MODULE: ./src/pages/hello-ionic/hello-ionic.ts
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -44,24 +45,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var HelloIonicPage = (function () {
     function HelloIonicPage() {
-        this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-            'american-football', 'boat', 'bluetooth', 'build'];
-        this.items = [];
-        for (var i = 1; i < 11; i++) {
-            this.items.push({
-                title: 'Item ' + i,
-                note: 'This is item #' + i,
-                icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-            });
-        }
+        this.icons = ['flask', 'wifi', 'beer', 'football'];
+        this.showlists = false;
+        this.items = [
+            {
+                title: "hello",
+                note: "note1"
+            }
+        ];
     }
+    HelloIonicPage.prototype.onAdd = function () {
+        this.showlists = false;
+    };
+    HelloIonicPage.prototype.onAdded = function () {
+        this.showlists = true;
+    };
     return HelloIonicPage;
 }());
+__decorate([
+    __WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */](__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */]),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
+], HelloIonicPage.prototype, "nav", void 0);
 HelloIonicPage = __decorate([
     __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */]({
-        selector: 'page-hello-ionic',template:/*ion-inline-start:"/Users/sudhanvamg/Codeforgood/githubIonic/src/pages/hello-ionic/hello-ionic.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n        <ion-title>Reaching hands</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-list>\n        <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n          <ion-card >\n        <ion-card-header>\n            Item name\n        </ion-card-header>\n        <ion-card-content>\n            The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.\n        </ion-card-content>\n    </ion-card>\n     \n    </button>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/sudhanvamg/Codeforgood/githubIonic/src/pages/hello-ionic/hello-ionic.html"*/
+        selector: 'page-hello-ionic',template:/*ion-inline-start:"/Users/sudhanvamg/team-15/Ionic/src/pages/hello-ionic/hello-ionic.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n        <ion-title>Reaching hands</ion-title>\n    </ion-navbar>\n</ion-header>\n\n<ion-content>\n    <ion-item *ngIf="showlists == true">\n        <ion-list>\n            <button ion-item *ngFor="let item of items">\n          <ion-card >\n        <ion-card-header>\n            Item name\n        </ion-card-header>\n        <ion-card-content>\n            The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.\n        </ion-card-content>\n    </ion-card>\n     \n    </button>\n        </ion-list>\n        <div>\n            <button ion-button color="secondary" (click)="onAdd()" clear>Add</button>\n        </div>\n    </ion-item>\n\n    <ion-list *ngIf="showlists == false">\n\n        <ion-item>\n            <ion-label>Item Name</ion-label>\n            <ion-input type="text"></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label>User name</ion-label>\n            <ion-input type="password"></ion-input>\n        </ion-item>\n        <div>\n            <button ion-button color="secondary" (click)="onAdded()" clear>Done</button>\n        </div>\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"/Users/sudhanvamg/team-15/Ionic/src/pages/hello-ionic/hello-ionic.html"*/
     }),
     __metadata("design:paramtypes", [])
 ], HelloIonicPage);
@@ -69,7 +80,7 @@ HelloIonicPage = __decorate([
 //# sourceMappingURL=hello-ionic.js.map
 // CONCATENATED MODULE: ./src/pages/item-details/item-details.ts
 /* harmony import */ var item_details___WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var item_details___WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 var item_details___decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -92,15 +103,15 @@ var ItemDetailsPage = (function () {
 }());
 ItemDetailsPage = item_details___decorate([
     item_details___WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */]({
-        selector: 'page-item-details',template:/*ion-inline-start:"/Users/sudhanvamg/Codeforgood/githubIonic/src/pages/item-details/item-details.html"*/'<ion-header>\n  <ion-navbar>\n    <button menuToggle *ngIf="!selectedItem">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Item Details</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <h3 text-center *ngIf="selectedItem">\n    {{selectedItem.title}}\n    <ion-icon [name]="selectedItem.icon"></ion-icon>\n  </h3>\n  <h4 text-center *ngIf="selectedItem">\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </h4>\n</ion-content>\n'/*ion-inline-end:"/Users/sudhanvamg/Codeforgood/githubIonic/src/pages/item-details/item-details.html"*/
+        selector: 'page-item-details',template:/*ion-inline-start:"/Users/sudhanvamg/team-15/Ionic/src/pages/item-details/item-details.html"*/'<ion-header>\n  <ion-navbar>\n    <button menuToggle *ngIf="!selectedItem">\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Item Details</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <h3 text-center *ngIf="selectedItem">\n    {{selectedItem.title}}\n    <ion-icon [name]="selectedItem.icon"></ion-icon>\n  </h3>\n  <h4 text-center *ngIf="selectedItem">\n    You navigated here from <b>{{selectedItem.title}}</b>\n  </h4>\n</ion-content>\n'/*ion-inline-end:"/Users/sudhanvamg/team-15/Ionic/src/pages/item-details/item-details.html"*/
     }),
-    item_details___metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+    item_details___metadata("design:paramtypes", [item_details___WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], item_details___WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
 ], ItemDetailsPage);
 
 //# sourceMappingURL=item-details.js.map
 // CONCATENATED MODULE: ./src/pages/list/list.ts
 /* harmony import */ var list___WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var list___WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var list___WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 var list___decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -137,7 +148,7 @@ var list_ListPage = (function () {
 }());
 list_ListPage = list___decorate([
     list___WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */]({
-        selector: 'page-list',template:/*ion-inline-start:"/Users/sudhanvamg/Codeforgood/githubIonic/src/pages/list/list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>My First List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon name="{{item.icon}}" item-left></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-right>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/sudhanvamg/Codeforgood/githubIonic/src/pages/list/list.html"*/
+        selector: 'page-list',template:/*ion-inline-start:"/Users/sudhanvamg/team-15/Ionic/src/pages/list/list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>My First List</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n      <ion-icon name="{{item.icon}}" item-left></ion-icon>\n      {{item.title}}\n      <div class="item-note" item-right>\n        {{item.note}}\n      </div>\n    </button>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/sudhanvamg/team-15/Ionic/src/pages/list/list.html"*/
     }),
     list___metadata("design:paramtypes", [list___WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], list___WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
 ], list_ListPage);
@@ -145,7 +156,7 @@ list_ListPage = list___decorate([
 //# sourceMappingURL=list.js.map
 // CONCATENATED MODULE: ./src/app/app.component.ts
 /* harmony import */ var app_component___WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var app_component___WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var app_component___WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__ = __webpack_require__(27);
 var app_component___decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -200,7 +211,7 @@ app_component___decorate([
     app_component___metadata("design:type", app_component___WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Nav */])
 ], app_component_MyApp.prototype, "nav", void 0);
 app_component_MyApp = app_component___decorate([
-    app_component___WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */]({template:/*ion-inline-start:"/Users/sudhanvamg/Codeforgood/githubIonic/src/app/app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Pages</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/sudhanvamg/Codeforgood/githubIonic/src/app/app.html"*/
+    app_component___WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */]({template:/*ion-inline-start:"/Users/sudhanvamg/team-15/Ionic/src/app/app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Pages</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/Users/sudhanvamg/team-15/Ionic/src/app/app.html"*/
     }),
     app_component___metadata("design:paramtypes", [app_component___WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */],
         app_component___WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* MenuController */],
@@ -212,7 +223,7 @@ app_component_MyApp = app_component___decorate([
 // CONCATENATED MODULE: ./src/app/app.module.ts
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_splash_screen__ = __webpack_require__(27);
 var app_module___decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
