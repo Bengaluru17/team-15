@@ -6,9 +6,9 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/home', function(req, res, next) {
-    res.send('welcome to home');
-    db.addone({});
+router.get('/users/test', function(req, res, next) {
+    res.send('respond with a ohhhh');
 });
+
 
 module.exports = router;
