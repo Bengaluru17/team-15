@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
+import sys
 from twilio.rest import Client
 
 ac_sid = "AC98658f8d426358d972791b27b18bee41"
@@ -25,7 +26,7 @@ driver = webdriver.Chrome('./drivers/chromedriver')
  
 driver.get("https://web.whatsapp.com/")
 wait = WebDriverWait(driver, 600)
- 
+print "hello"
 def send_whatsapp(person, item):
 	list_of_people = ['"Vishal"', '"Sanghamesh"','"Onam"', '"MG"']
 	for target in list_of_people:
@@ -39,5 +40,5 @@ def send_whatsapp(person, item):
 		input_box.send_keys(string + Keys.ENTER)
 		time.sleep(1)
 
-send_sms("Vishal", "Chocolate")
-send_whatsapp("Pocahontas", "Turnip")
+send_sms(sys.argv[1], sys.argv[2])
+send_whatsapp(sys.argv[1], sys.argv[2])
