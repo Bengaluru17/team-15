@@ -26,8 +26,14 @@ app.controller('SignCtrl', ['$scope', '$state', 'authUser', function($scope, $st
         $scope.items.push(newItem);
 
     }
-    $scope.buyItem = function(itemVal) {
-        console.log("calling function", itemVal);
+    $scope.buyItem = function() {
+        // authUser.uploadforbuy().then(function(data) {
+        //         console.log(data);
+        //         $scope.items = data.data;
+        //     },
+        //     function() {
+        //         console.log("error");
+        //     });
     }
     $scope.onAdditem = function() {
         var newItem = {

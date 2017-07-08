@@ -30,6 +30,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: 'app/js/core/templates/signup.html',
             controller: 'SignCtrl'
         })
+        .state('admin', {
+            url: '/admin',
+            templateUrl: 'app/js/core/templates/admin.html'
+        })
         .state('resetPass', {
             url: '/resetpsswd/{email}',
             templateUrl: 'app/js/core/templates/resetpassword.html',

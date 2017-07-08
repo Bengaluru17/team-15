@@ -17,7 +17,6 @@ router.get('/getitems', function(req, res) {
 
     db.collection('inventory').find({}).toArray(function(err, data) {
         if (!err && data) {
-            console.log(data);
             res.send({
                 "status": "Success",
                 "data": data
