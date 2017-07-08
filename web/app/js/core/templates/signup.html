@@ -31,7 +31,7 @@
                         <p>Item <input type="text" ng-model="item" required></p>
                         <p>Quantity <input type="number" ng-model="quantity" required></p>
                         <p>Amount <input type="number" ng-model="amount" required></p>
-                        <input type="submit" value="Submit" ng-click="onAddItem()">
+                        <input type="submit" value="Submit" ng-click="onAddedItem()">
                     </form>
                 </div>
 
@@ -43,7 +43,7 @@
                 <div class="jumbotron">
                     <h1>Jumbotron</h1>
                     <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <p><a class="btn btn-primary btn-lg">Add item</a></p>
+                    <p><a class="btn btn-primary btn-lg" ng-click="onAddItem()">Add item</a></p>
                 </div>
             </div>
 
