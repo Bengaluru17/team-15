@@ -32,7 +32,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         })
         .state('admin', {
             url: '/admin',
-            templateUrl: 'app/js/core/templates/admin.html'
+            templateUrl: 'app/js/core/templates/admin.html',
+            controller: 'adminCtrl'
         })
         .state('donation', {
             url: '/donations',
