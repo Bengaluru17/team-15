@@ -9,6 +9,9 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
     <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" rel="stylesheet" href="app/css/app.css" />
@@ -25,6 +28,24 @@
 </head>
 
 <body ng-controller="HomeCtrl">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
     <div class="container-fluid">
         <div ui-view></div>
     </div>
@@ -44,9 +65,9 @@
     <script src="app/js/core/state.js"></script>
     <script src="app/js/core/controllers/HomeCtrl.js"></script>
     <script src="app/js/core/controllers/SignupCtrl.js"></script>
-    <script src="app/js/core/controllers/DashCtrl.js"></script>
     <script src="app/js/core/controllers/LandCtrl.js"></script>
     <script src="app/js/core/controllers/adminCtrl.js"></script>
+    <script src="app/js/core/controllers/admindashCtrl.js"></script>
     <script src="app/js/cookie.js"></script>
     <!-- https://github.com/js-cookie/js-cookie -->
 

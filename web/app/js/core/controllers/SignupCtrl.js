@@ -46,18 +46,12 @@ app.controller('SignCtrl', ['$scope', '$state', 'authUser', function($scope, $st
             amount: $("#amount").val(),
         }
         authUser.sendForApproval(newItem).then(function(data) {
-
+                $scope.showitems = true;
                 console.log("success");
             },
             function() {
                 console.log("error");
             });
-        authUser.getApprovedItems().then(function(data) {
-                console.log(data);
-                $scope.items = data.data;
-            },
-            function() {
-                console.log("error");
-            });
+
     }
 }]);

@@ -30,6 +30,45 @@ app.factory('authUser', ['$http', '$state', '$q', function($http, $state, $q) {
                     });
             return def.promise;
         },
+        getApprovalItems: function() {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: host + '/getapprove'
+            }
+            $http(req).success(
+                    function(resp) {
+                        console.log();
+                        def.resolve(resp);
+                        //user found
+                    })
+                .error(
+                    function() {
+                        def.reject("error");
+                        console.log("error");
+                    });
+            return def.promise;
+        },
+        setApprovedlItems: function(datatosend) {
+            var def = $q.defer();
+            var req = {
+                method: 'POST',
+                url: host + '/setapproved',
+                data: datatosend
+            }
+            $http(req).success(
+                    function(resp) {
+                        console.log();
+                        def.resolve(resp);
+                        //user found
+                    })
+                .error(
+                    function() {
+                        def.reject("error");
+                        console.log("error");
+                    });
+            return def.promise;
+        },
         sendForApproval: function(data) {
             var def = $q.defer();
             var req = {
