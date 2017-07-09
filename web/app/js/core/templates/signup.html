@@ -32,10 +32,10 @@
 
                         <tbody>
                             <tr>
-                                <td>{{item.name}}</td>
-                                <td>{{item.amount}}</td>
-                                <td>{{item.item}}</td>
-                                <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myReqModal" ng-click="buyItem()">buy this item</button></td>
+                                <td id="itemName">{{item.name}}</td>
+                                <td id="itemAmount">{{item.amount}}</td>
+                                <td id="itemItems">{{item.item}}</td>
+                                <td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myReqModal">buy this item</button></td>
 
 
                             </tr>
@@ -46,6 +46,8 @@
 
                 </div>
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Addmodal">Add an item</button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewmodal">View items being bought</button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="goback()">go back</button>
             </div>
 
         </div>
@@ -67,10 +69,10 @@
             <div class="footrow2">
                 <div class="foot">
                     <div class="half-width">
-                        <p class="foot-p">&copy; cfg</p>
+                        <p class="foot-p">&copy; Team 15</p>
                     </div>
                     <div class="half-width">
-                        <p style="float:right !important;" class="foot-p">Developed &amp; maintained "cfg"</p>
+                        <p style="float:right !important;" class="foot-p">Developed &amp; maintained Team 15</p>
                     </div>
                 </div>
             </div>
@@ -86,7 +88,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Book asd Details</h4>
+                        <h4 class="modal-title">Buyer Details</h4>
                     </div>
                     <div class="modal-body">
                         <div class="panel-body">
@@ -94,9 +96,9 @@
 
                             <div class="form-group">
                                 <label class="control-label" for="focusedInput">name</label>
-                                <input class="form-control" id="reqtitle" type="text">
+                                <input class="form-control" id="buyername" type="text">
                             </div>
-                            <button type="button" id="reqbutton" class="btn btn-success btn-sm" style="float:right;" ng-click="onitem()" data-dismiss="modal">Request Book</button>
+                            <button type="button" id="reqbutton" class="btn btn-success btn-sm" style="float:right;" ng-click="buyItem()" data-dismiss="modal">Buy Book</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -135,7 +137,7 @@
                                 <label class="control-label" for="focusedInput">quantity</label>
                                 <input class="form-control" id="amount" type="number">
                             </div>
-                            <button type="button" id="reqbutton" class="btn btn-success btn-sm" style="float:right;" ng-click="onAdditem()" data-dismiss="modal">Request this item</button>
+                            <button type="button" id="reqbutton" class="btn btn-success btn-sm" style="float:right;" data-dismiss="modal" ng-click="onAdditem()" data-dismiss="modal">Request this item</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -146,5 +148,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="viewmodal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Items that are being bought</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div ng-repeat="fri in friends">
+                            <blockquote>
+                                <p>{{fri.item}}</p>
+                                <small>By :  <cite title="Source Title">{{fri.name}}</cite></small>
+                                <button type="button" class="btn btn-primary btn-xs">Confirm and upload Bill</button>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
