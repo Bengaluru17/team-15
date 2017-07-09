@@ -67,16 +67,10 @@ router.post('/additems', function(req, res) {
 });
 
 router.post('/setapproved', function(req, res) {
-    console.log(req.body);
+    console.log(req.body.title);
     //db.collection('toapprove').remove({ item: String(req.body.item) }, true);
-    db.collection('contacts', {}, function(err, contacts) {
-        contacts.remove({ 'item': req.body.title }, function(err, result) {
-            if (err) {
-                console.log(err);
-            }
-            console.log(result);
-            db.close();
-        });
+    db.collection('toapprove', {}, function(err, contacts) {
+        contacts.remove({ 'item': req.body.title }, 1);
     });
     db.collection('inventory').insertOne({
 
